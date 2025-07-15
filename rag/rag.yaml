@@ -1,0 +1,12 @@
+server:
+  knowledgebase:
+    endpoint: "http://127.0.0.1:8001"
+
+rag:
+  model_name: "deepseek-chat"
+  openai_base_url: "https://api.deepseek.com"
+  openai_api_key: ""
+  default_n_results: 5
+
+web:
+  port: 8000

@@ -1,0 +1,8 @@
+chromadb==1.0.15
+Flask==2.3.2
+langchain_community==0.3.27
+langchain_core==0.3.68
+langchain_text_splitters==0.3.8
+openai==1.95.1
+PyYAML==6.0.2
+dashscope==1.23.8

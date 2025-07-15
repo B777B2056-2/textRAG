@@ -1,0 +1,19 @@
+storage:
+  tmp_doc_base_dir: "./tmp_doc_base_dir"
+
+embeddings:
+  model_name: "text-embedding-v1"
+  dimensions: 1024
+  openai_base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+  openai_api_key: ""
+  default_chunk_size: 1024
+
+rerank:
+  model_name: "gte-rerank-v2"
+  openai_api_key: ""
+
+chromadb:
+  local_persist_directory: "./vector.db"
+
+web:
+  port: 8001

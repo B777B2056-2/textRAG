@@ -1,0 +1,4 @@
+Flask==2.3.2
+openai==1.95.1
+PyYAML==6.0.2
+Requests==2.32.4
