@@ -10,3 +10,8 @@ rag:
 
 web:
   port: 8000
+  logger:
+    level: INFO
+    filename: "logs/rag.log"
+    max_bytes: 104857600
+    backup_count: 2

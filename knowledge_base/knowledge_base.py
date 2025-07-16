@@ -11,6 +11,7 @@ from openai import OpenAI
 import chromadb
 import dashscope
 from http import HTTPStatus
+import logging
 
 
 class KnowledgeBase:
@@ -65,13 +66,17 @@ class KnowledgeBase:
         try:
             collections = self._db.get_or_create_collection(f"{self.name}_collection")
         except Exception as e:
-            print(e)
+            logging.error(
+                f"knowledge base create vector database {self.name} exception occurred: {e}",
+                exc_info=True)
             raise e
         
         try:
             collections.upsert(ids=str(uuid.uuid4()), documents=text, embeddings=embeddings)
         except Exception as e:
-            print(e)
+            logging.error(
+                f"knowledge base store to vector database exception occurred: {e}",
+                exc_info=True)
             raise e
         
         
@@ -109,13 +114,17 @@ class KnowledgeBase:
         try:
             collections = self._db.get_collection(f"{self.name}_collection")
         except Exception as e:
-            print(e)
+            logging.error(
+                f"knowledge base get vector database {self.name} exception occurred: {e}",
+                exc_info=True)
             raise e
         # 3. 查询（召回）
         try:
             results = collections.query(question_embedding, n_results=top_k)
         except Exception as e:
-            print(e)
+            logging.error(
+                f"knowledge base query from vector database exception occurred: {e}",
+                exc_info=True)
             raise e
         docs = results["documents"][0]
         # 4. 重排序

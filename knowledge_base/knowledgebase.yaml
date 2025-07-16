@@ -17,3 +17,8 @@ chromadb:
 
 web:
   port: 8001
+  logger:
+    level: INFO
+    filename: "logs/knowledgebase.log"
+    max_bytes: 104857600
+    backup_count: 2

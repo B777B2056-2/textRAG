@@ -3,11 +3,11 @@ FROM python:3.13-slim
 WORKDIR /app
 
 COPY ../common ./common
-COPY . ./knowledge_base
+COPY ./knowledge_base ./knowledge_base
 
-ENV PYTHONPATH="${PYTHONPATH}:/app/common"
+RUN pip install -r knowledge_base/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-RUN pip install -r knowledge_base/requirements.txt
+WORKDIR /app/knowledge_base
 
 EXPOSE 8001
-CMD ["python", "knowledge_base/app.py"]
+CMD ["python", "app.py"]

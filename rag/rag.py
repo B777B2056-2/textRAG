@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-from openai import OpenAI
+from typing import Any, Generator
+
+from openai import OpenAI, Stream
+from openai.types.chat import ChatCompletionChunk, ChatCompletion
 from client import KnowledgeBaseClient
 
 
@@ -14,7 +17,7 @@ class RetrievalAugmentedGeneration:
         self.openai_base_url = configs.get("rag").get("openai_base_url")
         self.openai_api_key = configs.get("rag").get("openai_api_key")
         
-    def generate(self, kb_name: str, prompt: str, n_results: int) -> str:
+    def generate(self, kb_name: str, prompt: str, n_results: int, stream: bool) -> str | Stream[ChatCompletionChunk]:
         # 1. 检索知识库
         kb_clt = KnowledgeBaseClient()
         context = kb_clt.query(name=kb_name, question=prompt, n_results=n_results)
@@ -28,6 +31,11 @@ class RetrievalAugmentedGeneration:
                 {"role": "system", "content": "Please use Context as a reference to answer questions"},
                 {"role": "user", "content": full_prompt},
             ],
-            stream=False
+            stream=stream
         )
-        return response.choices[0].message.content
+        
+        if not stream:
+            return response.choices[0].message.content
+        else:
+            return response
+        
