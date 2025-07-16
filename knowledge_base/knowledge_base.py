@@ -129,9 +129,3 @@ class KnowledgeBase:
         docs = results["documents"][0]
         # 4. 重排序
         return self._rerank(question=question, docs=docs, top_k=top_k)
-        
-        
-if __name__ == "__main__":
-    kb = KnowledgeBase(name="test")
-    # kb.create("/Users/jiangrui07/Downloads/通义千问3-Embedding.md", chunk_size=64)
-    print(kb.query("Qwen3 Embedding 模型系列是什么？"))
